@@ -15,3 +15,18 @@ tLeitura *criaLeitura(int latitude,int longitude,float temperatura)
 
     return leitura;
 }
+
+int retornaLatitude(tLeitura *leitura)
+{
+    return leitura->latitude;
+}
+
+int retornaLongitude(tLeitura *leitura)
+{
+    return leitura->longitude;
+}
+
+float retornaTemperatura(tLeitura *leitura)
+{
+    return leitura->temperatura;
+}

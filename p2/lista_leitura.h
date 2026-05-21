@@ -4,5 +4,5 @@
 typedef struct lista_leitura tLista_leitura;
 
 tLista_leitura *criaListaLeitura();
-
+void insereListaLeitura(tLista_leitura *lista,tLeitura *leitura);
 #endif
