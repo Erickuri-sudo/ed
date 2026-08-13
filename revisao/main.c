@@ -4,6 +4,7 @@
 void calc_esfera (float r, float* area, float* volume);
 
 int raizes (float a, float b, float c, float* x1, float* x2);
+int pares (int n, int* vet);
 
 int main(int argc, char const *argv[])
 {
@@ -41,6 +42,19 @@ int main(int argc, char const *argv[])
     free(x1);
     free(x2);
 
+    // uso da funcao pares
+    int n = 0;
+    printf("Insira o numero de posicoes do vetor:\n");
+    scanf("%d",&n);
+    int vet[n];
+    for(int i = 0;i<n;i++){
+        printf("Insira a nesima posicao do vetor\n",i+1);
+        scanf("%d",&vet[i]);
+    }
+    int nPares = pares(n,vet);
+    printf("Numero de pares: %d\n",nPares);
+
+
     return 0;
 }
 
@@ -68,4 +82,15 @@ int raizes (float a, float b, float c, float* x1, float* x2){
     }
     return 2;
     
+}
+
+int pares (int n, int* vet){
+    int nPares = 0;
+
+    for(int i = 0;i<n;i++){
+        if(vet[i]%2==0){
+            nPares++;
+        }
+    }
+    return nPares;
 }
