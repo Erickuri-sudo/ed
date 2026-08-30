@@ -68,17 +68,17 @@ int main(int argc, char const *argv[])
 
     printf("insira o grau do polinomio: ");
     scanf("%d",&grau);
-    double poli[grau];
+    double poli[grau+1];
     double x = 0.0;
     printf("insira o valor de x: ");
-    scanf("%d",&grau);
+    scanf("%lf",&x);
     printf("insira os coeficientes: ");
-    for(int i = 0; i <= grau;i++){
+    for(int i = 0; i < (grau+1);i++){
         scanf("%lf", &poli[i]);
     }
     double resultado = 0.0;
     resultado = avalia(poli,grau,x);
-    printf("%lf\n",resultado);
+    printf("%.2lf\n",resultado);
     return 0;
 }
 
@@ -136,8 +136,8 @@ void inverte (int n, int* vet){
 double avalia (double* poli, int grau, double x){
     double result = 0.0;
 
-    for(int i = 0;i<=grau;i++){
-        result += pow(x,i)*poli[i];
+    for(int i = 0;i<(grau+1);i++){
+        result += pow(x,grau - i)*poli[i];
     }
     return result;
 }
