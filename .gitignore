@@ -1,4 +1,15 @@
 .DS_Store
-.dSYM
+*.dSYM
 *.o
 *.txt
+*.zip
+*.out
+*.vscode
+
+# Ignora todos os arquivos no diretório atual
+*
+# Abre exceção para subpastas
+!*/
+# Abre exceção para os arquivos de código-fonte C
+!*.c
+!*.h
