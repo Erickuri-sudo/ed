@@ -59,6 +59,25 @@ Matriz *transposta(Matriz *mat)
     return trs;
 }
 
+Matriz *multiplicacao(Matriz *mat1, Matriz *mat2)
+{
+    if(mat1->nColunas != mat2->nLinhas){
+        return NULL;
+    }
+    Matriz* mult = inicializaMatriz(mat1->nLinhas,mat2->nColunas);
+    int aux = 0;
+    for(int i = 0;i<mat1->nLinhas;i++){
+        for(int j = 0;j<mat2->nColunas;j++){
+            for(int x = 0;x<mat2->nLinhas;x++){
+                aux+=mat1->mat[i][x]*mat2->mat[x][j];
+            }
+            modificaElemento(mult,i,j,aux);
+            aux = 0;
+        }
+    }
+    return mult;
+}
+
 void imprimeMatriz(Matriz *mat)
 {
     for(int i = 0;i<mat->nLinhas;i++){
@@ -67,7 +86,6 @@ void imprimeMatriz(Matriz *mat)
         }
         printf("\n");
     }
-    printf("\n");
 }
 
 void imprimeLinha(Matriz *mat, int indice)
