@@ -11,8 +11,11 @@ Catalogo criaCatalogo(int nProdutos);
 Catalogo insereProdutoCatalogo(Produto* p,Catalogo c,int pos);
 Produto* retornaProdutoPorId(Catalogo c,int id);
 void imprimeCatalogo(Catalogo c);
+void liberaCatalogo(Catalogo c);
 int main(int argc, char const *argv[])
 { 
+    freopen("entrada.txt","r",stdin);
+    freopen("saida.txt","w",stdout);
     int nProdutos = 0;
     scanf("%d",&nProdutos);
     int id = 0;
@@ -48,6 +51,8 @@ int main(int argc, char const *argv[])
         adicionaFilial(s,f);
     }
     imprimeSupermercado(s);
+    liberaSupermercado(s);
+    liberaCatalogo(c);
     //imprimeCatalogo(c);
     return 0;
 }
@@ -74,4 +79,10 @@ void imprimeCatalogo(Catalogo c){
         printf("nome: %s,valor: %.2f, id: %d\n",retornaNomeProduto(c.produtos[i]),
         retornaPrecoProduto(c.produtos[i]),retornaIdProduto(c.produtos[i]));
     }
+}
+void liberaCatalogo(Catalogo c){
+    for(int i = 0;i<c.nProdutos;i++){
+        liberaProduto(c.produtos[i]);
+    }
+    free(c.produtos);
 }

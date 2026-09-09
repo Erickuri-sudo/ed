@@ -33,4 +33,5 @@ void liberaFilial(Filial *f)
 {
     liberaEstoque(f->estoque);
     free(f->nome);
+    free(f);
 }
