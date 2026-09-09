@@ -18,11 +18,16 @@ int main(int argc, char const *argv[])
         }
     }
     Mapa* trs = transpoe(mapa);
-
+    Mapa* ord = ordena(mapa);
     imprimeMapa(mapa);
     printf("\n");
     printf("== Primeiro experimento:\n");
     imprimeMapa(trs);
-    
+    printf("\n");
+    printf("== Segundo experimento:\n");
+    imprimeMapa(ord);
+    liberaMapa(mapa);
+    liberaMapa(trs);
+    liberaMapa(ord);
     return 0;
 }
