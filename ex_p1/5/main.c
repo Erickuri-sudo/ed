@@ -3,8 +3,8 @@
 
 int main(int argc, char const *argv[])
 {
-    freopen("entrada1.txt","r",stdin);
-    freopen("saida1.txt","w",stdout);
+    freopen("entrada3.txt","r",stdin);
+    freopen("saida3.txt","w",stdout);
 
     int lins= 0,cols = 0;
     
@@ -24,8 +24,11 @@ int main(int argc, char const *argv[])
     Matriz* sub = criaSubMatriz(m,slini,slfim,scini,scfim);
     printf("Matriz Original:\n");
     imprimeMatriz(m);
+    printf("\n");
     printf("Visão Submatriz %d-%d %d-%d:\n",slini,slfim,scini,scfim);
     imprimeMatriz(sub);
+    printf("\n");
+    imprimeSubVisoesQuadradas(m);
     liberaMatriz(m);
     return 0;
 }

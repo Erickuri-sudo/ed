@@ -42,6 +42,40 @@ Matriz* criaSubMatriz(Matriz *m, int linha_ini, int linha_fim, int col_ini, int 
     return sub;
 }
 
+void imprimeSubVisoesQuadradas(Matriz *m)
+{
+/* Para cada índice i de 0 até o número de linhas da matriz origem
+Para cada índice j de 0 até o número de colunas da matriz origem
+Max_tam: Determinar o maior tamanho possível de submatriz quadrada, a partir de (i,j)
+Para cada x de 0 até o Max_tam:
+sub = criaSubMatriz (origem, i, i+k, j, j+k);
+imprime(sub);
+libera(sub); */
+
+    for(int i = 0;i<m->lins;i++){
+        for(int j = 0;j<m->cols;j++){
+            int max_tam = 0;
+            int dLins = m->lins - i;
+            int dCols = m->cols - j;
+            if(dLins >= dCols){
+                max_tam = dCols;
+            }
+            else
+                max_tam = m->lins - i;
+
+            for(int x = 0;x<max_tam;x++){
+                Matriz* sub = criaSubMatriz(m,i,i+x,j,j+x);
+                printf("Submatriz quadrada %dx%d em (%d,%d):\n",x+1,x+1,i,j);
+                imprimeMatriz(sub);
+                printf("\n");
+                free(sub->dado);
+                free(sub);
+            }
+            
+        }
+    }
+}
+
 void imprimeMatriz(Matriz *m)
 {
     for(int i = 0;i<m->lins;i++){
