@@ -69,7 +69,26 @@ void retiraEstudante(Lista *l, int mat)
     if(!p){
         return;
     }
-    
+    // caso p eh o unico
+    else if(l->prim == p && l->ult == p){
+        l->prim = l->prim = NULL;
+    }
+    // caso p eh o ultimo
+    else if(l->ult == p){
+        aux->prox = NULL;
+        l->ult = aux;
+    }
+    // caso p eh o primeiro
+    else if(l->prim == p){
+        l->prim = p->prox;
+    }
+    // caso comum
+    else{
+        aux->prox = p->prox;
+    }
+
+    liberaEstudante(p->e);
+    free(p);
 }
 
 float calculaMediaCr(Lista *l)
@@ -83,4 +102,16 @@ float calculaMediaCr(Lista *l)
     }
     float media = soma/(float)n;
     return media;
+}
+
+void liberaLista(Lista *l)
+{
+    Cel* p = l->prim;
+    Cel* aux = NULL;
+    while(p){
+        aux = p;
+        p = p->prox;
+        liberaEstudante(aux->e);
+        free(aux);
+    }
 }

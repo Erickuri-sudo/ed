@@ -25,5 +25,11 @@ int main(int argc, char const *argv[])
 
     imprimeLista(l);
 
+    int mat = 0;
+    while(scanf("%d",&mat)==1){
+        retiraEstudante(l,mat);
+        imprimeLista(l);
+    }
+    liberaLista(l);
     return 0;
 }
