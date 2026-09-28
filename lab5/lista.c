@@ -71,7 +71,7 @@ void retiraEstudante(Lista *l, int mat)
     }
     // caso p eh o unico
     else if(l->prim == p && l->ult == p){
-        l->prim = l->prim = NULL;
+        l->prim = l->ult = NULL;
     }
     // caso p eh o ultimo
     else if(l->ult == p){
