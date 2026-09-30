@@ -9,5 +9,6 @@ Lista* criaLista(char* nome,int n);
 void insereQuestao(Lista* l,Questao* q);
 void imprimeLista(Lista* l);
 void insereQuestaoDoBancoNaProva(Lista* banco,Lista* prova, char* id);
-void MergeProvas(Lista* p1,Lista* p2);
+Lista* mergeProvas(Lista* p1,Lista* p2);
+void retiraQuestoesRepetidas(Lista* merge);
 #endif

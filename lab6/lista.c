@@ -68,3 +68,52 @@ void insereQuestaoDoBancoNaProva(Lista *banco, Lista *prova, char* id)
     insereQuestao(prova,aux->q);
 
 }
+
+Lista* mergeProvas(Lista *p1, Lista *p2)
+{
+    Lista* merge = criaLista("merge",p1->n+p2->n);
+
+    Cel* aux = p1->prim;
+    for(int i = 0;i<p1->n;i++){
+        insereQuestao(merge,aux->q);
+        aux = aux->prox;
+    }
+    aux = p2->prim;
+    for(int i = 0;i<p2->n;i++){
+        insereQuestao(merge,aux->q);
+        aux = aux->prox;
+    }
+    return merge;
+}
+
+void retiraQuestoesRepetidas(Lista *merge)
+{
+    Cel* p = merge->prim;
+
+    while(p){
+        Cel* ant = p;
+        Cel* aux = p->prox;
+        while(aux){
+            if(!strcmp(retornaIdQuestao(p->q),retornaIdQuestao(aux->q))){
+                // desencadeia aux
+                ant->prox = aux->prox;
+                // se aux for a ultima celula atualiza a sentinela
+                if(aux == merge->ult){
+                    merge->ult = ant;
+                }
+                // remove a celula e atualiza aux
+                Cel* removida = aux;
+                aux = aux->prox;
+                free(removida);
+                merge->n--;
+                ant = ant->prox;
+            }
+            else{
+                ant = aux;
+                aux = aux->prox;
+            }
+        }
+        p = p->prox;
+    }
+    
+}

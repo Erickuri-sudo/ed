@@ -30,7 +30,6 @@ int main(int argc, char const *argv[])
     for(int i = 0;i<qtdP1;i++){
         char id[3];
         scanf("%s",id);
-        printf("%s ",id);
         insereQuestaoDoBancoNaProva(l,p1,id);
     }
     imprimeLista(p1);
@@ -43,9 +42,12 @@ int main(int argc, char const *argv[])
     for(int i = 0;i<qtdP2;i++){
         char id[3];
         scanf("%s",id);
-        printf("%s ",id);
         insereQuestaoDoBancoNaProva(l,p2,id);
     }
     imprimeLista(p2);
+    Lista* m = mergeProvas(p1,p2);
+    imprimeLista(m);
+    retiraQuestoesRepetidas(m);
+    imprimeLista(m);
     return 0;
 }
