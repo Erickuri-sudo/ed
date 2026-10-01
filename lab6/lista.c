@@ -71,28 +71,60 @@ void insereQuestaoDoBancoNaProva(Lista *banco, Lista *prova, char* id)
 
 Lista* mergeProvas(Lista *p1, Lista *p2)
 {
-    Lista* merge = criaLista("merge",p1->n+p2->n);
+    if(!p1 || !p2){
+        return NULL;
+    }
 
-    Cel* aux = p1->prim;
-    for(int i = 0;i<p1->n;i++){
-        insereQuestao(merge,aux->q);
-        aux = aux->prox;
+    Lista* merge = criaLista("merge",p1->n+p2->n);
+    // ponteiros que vao caminhar nas duas listas
+    Cel* p1_atual = p1->prim;
+    Cel* p2_atual = p2->prim;
+    // ponteiros para nao perder a referencia dos proximos
+    Cel* p1_prox = NULL;
+    Cel* p2_prox = NULL;
+    
+    // inicializando prim e ult para previnir segfault
+    merge->prim = p1_atual;
+    merge->ult = p2_atual;
+
+    while(p1_atual!=NULL && p2_atual!=NULL){
+        // recebe os proximos
+        p1_prox = p1_atual->prox;
+        p2_prox = p2_atual->prox;
+
+        if(p1_prox){
+            // prox do atual se torna o prox do p2_atual
+            p1_atual->prox = p2_prox;
+        }
+        
+        p2_atual->prox = p1_atual;
+        merge->ult = p1_atual;
+
+        p1_atual = p1_prox;
+        p2_atual = p2_prox;
     }
-    aux = p2->prim;
-    for(int i = 0;i<p2->n;i++){
-        insereQuestao(merge,aux->q);
-        aux = aux->prox;
+
+    if(p2_atual!=NULL){
+        merge->ult->prox = p2_atual;
+        merge->ult = p2->ult;
     }
+    else if(p1_atual!=NULL){
+        merge->ult = p1->ult;
+
+    }
+
     return merge;
 }
 
 void retiraQuestoesRepetidas(Lista *merge)
 {
     Cel* p = merge->prim;
-
+    // o loop exterior itera sobre cada celula da lista
     while(p){
         Cel* ant = p;
         Cel* aux = p->prox;
+        // para cada p, caminha com um aux(o proximo de p) e o anterior de aux
+        // assim, compara p com aux e mantem ant para remocao
         while(aux){
             if(!strcmp(retornaIdQuestao(p->q),retornaIdQuestao(aux->q))){
                 // desencadeia aux
