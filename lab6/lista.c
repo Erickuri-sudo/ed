@@ -149,3 +149,36 @@ void retiraQuestoesRepetidas(Lista *merge)
     }
     
 }
+
+void liberaListaCompleta(Lista *l)
+{
+    free(l->nome);
+    Cel* p = l->prim;
+    Cel* aux = NULL;
+    while(p){
+        aux = p;
+        p = p->prox;
+        liberaQuestao(aux->q);
+        free(aux);
+    }
+    free(l);
+}
+
+void liberaCelulasLista(Lista *l)
+{
+    free(l->nome);
+    Cel* p = l->prim;
+    Cel* aux = NULL;
+    while(p){
+        aux = p;
+        p = p->prox;
+        free(aux);
+    }
+    free(l);
+}
+
+void liberaSoSentinela(Lista *l)
+{
+    free(l->nome);
+    free(l);
+}

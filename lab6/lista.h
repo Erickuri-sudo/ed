@@ -11,4 +11,7 @@ void imprimeLista(Lista* l);
 void insereQuestaoDoBancoNaProva(Lista* banco,Lista* prova, char* id);
 Lista* mergeProvas(Lista* p1,Lista* p2);
 void retiraQuestoesRepetidas(Lista* merge);
+void liberaListaCompleta(Lista* l);
+void liberaCelulasLista(Lista* l);
+void liberaSoSentinela(Lista* l);
 #endif
