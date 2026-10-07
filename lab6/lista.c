@@ -77,41 +77,37 @@ Lista* mergeProvas(Lista *p1, Lista *p2)
 
     Lista* merge = criaLista("merge",p1->n+p2->n);
     // ponteiros que vao caminhar nas duas listas
-    Cel* p1_atual = p1->prim;
-    Cel* p2_atual = p2->prim;
-    // ponteiros para nao perder a referencia dos proximos
-    Cel* p1_prox = NULL;
-    Cel* p2_prox = NULL;
-    
-    // inicializando prim e ult para previnir segfault
-    merge->prim = p1_atual;
-    merge->ult = p2_atual;
+    Cel* c1 = p1->prim;
+    Cel* c2 = p2->prim;
+    Cel* prox = NULL;
 
-    while(p1_atual!=NULL && p2_atual!=NULL){
-        // recebe os proximos
-        p1_prox = p1_atual->prox;
-        p2_prox = p2_atual->prox;
+    merge->prim = c2;
+    merge->ult = c2;
+    c2 = c2->prox;
 
-        if(p1_prox){
-            // prox do atual se torna o prox do p2_atual
-            p1_atual->prox = p2_prox;
-        }
-        
-        p2_atual->prox = p1_atual;
-        merge->ult = p1_atual;
-
-        p1_atual = p1_prox;
-        p2_atual = p2_prox;
+    while(c1 && c2){
+        prox = c1->prox; // salva o proximo 
+        merge->ult->prox = c1; // o proximo da ultima posicao da lista aponta pra posicao atual
+        merge->ult = c1; // salva o atual como a ultima posicao
+        c1 = prox; // avanca o ponteiro atual
+        // repete o processo para p2
+        prox = c2->prox; 
+        merge->ult->prox = c2;
+        merge->ult = c2;
+        c2 = prox;
     }
 
-    if(p2_atual!=NULL){
-        merge->ult->prox = p2_atual;
+    if(c2){
+        merge->ult->prox = c2;
         merge->ult = p2->ult;
     }
-    else if(p1_atual!=NULL){
+    else if(c1){
+        merge->ult->prox = c1;
         merge->ult = p1->ult;
-
     }
+
+    liberaSentinela(p1);
+    liberaSentinela(p2);
 
     return merge;
 }
@@ -150,7 +146,7 @@ void retiraQuestoesRepetidas(Lista *merge)
     
 }
 
-void liberaListaCompleta(Lista *l)
+void liberaLista(Lista *l)
 {
     free(l->nome);
     Cel* p = l->prim;
@@ -164,7 +160,7 @@ void liberaListaCompleta(Lista *l)
     free(l);
 }
 
-void liberaCelulasLista(Lista *l)
+void liberaCelulas(Lista *l)
 {
     free(l->nome);
     Cel* p = l->prim;
@@ -177,7 +173,7 @@ void liberaCelulasLista(Lista *l)
     free(l);
 }
 
-void liberaSoSentinela(Lista *l)
+void liberaSentinela(Lista *l)
 {
     free(l->nome);
     free(l);

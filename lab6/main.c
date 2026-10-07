@@ -49,9 +49,7 @@ int main(int argc, char const *argv[])
     imprimeLista(m);
     retiraQuestoesRepetidas(m);
     imprimeLista(m);
-    liberaSoSentinela(p1);
-    liberaSoSentinela(p2);
-    liberaCelulasLista(m);
-    liberaListaCompleta(l);
+    liberaCelulas(m);
+    liberaLista(l);
     return 0;
 }
