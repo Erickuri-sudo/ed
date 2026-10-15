@@ -1,0 +1,26 @@
+name: C Build & Memory Leak Check (Valgrind)                                              
+                                                                                              
+on:                                                                                       
+  push:                                                                                   
+    branches: [ "main", "master", "develop" ]                                             
+  pull_request:                                                                           
+    branches: [ "main", "master" ]                                                        
+                                                                                          
+jobs:                                                                                     
+  build-and-test:                                                                         
+    runs-on: ubuntu-latest                                                                
+                                                                                          
+    steps:                                                                                
+      - name: 📥 Clonar repositório                                                       
+        uses: actions/checkout@v4                                                         
+                                                                                          
+      - name: 📦 Instalar dependências (GCC, Make, Valgrind)                              
+        run: |                                                                            
+          sudo apt-get update                                                             
+          sudo apt-get install -y gcc make valgrind                                       
+                                                                                          
+      - name: 🔨 Compilar e Linkar                                                        
+        run: make all                                                                     
+                                                                                          
+      - name: 🔍 Checar vazamento de memória (Valgrind)                                   
+        run: make valgrind
