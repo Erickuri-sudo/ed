@@ -43,34 +43,28 @@ Amostra *retiraFila(Fila *f)
         printf("fila vazia\n");
         return NULL;
     }
+    // amostra  recebe a primeira amostra da fila
     a = f->amostras[f->ini];
+    // atualiza o inicio da fila
     f->ini = (f->ini + 1)%MAX_TAM;
+    // decrementa o numero de elementos da fila
     f->n--;
     return a;
 }
 
 void imprimeFila(Fila *f)
 {
-    int fim = (f->ini+f->n)%MAX_TAM;
-    if(f->ini <= fim){
-        for(int i = f->ini;i<fim;i++){
-            imprimeAmostra(f->amostras[i]);
-        }
-    }
-    else{
-        for(int i = f->ini;i<MAX_TAM;i++){
-            imprimeAmostra(f->amostras[i]);
-        }
-        for(int i = 0;i<fim;i++){
-            imprimeAmostra(f->amostras[i]);
-        }
+    int pos = 0;
+    for(int i = f->ini;f<f->n;i++){
+        pos = (f->ini+i)%MAX_TAM;
+        imprimeAmostra(f->amostras[pos]);
     }
     printf("\n");
 }
 
 int retornaTamanhoFila(Fila *f)
 {
-    return f->n;
+return f->n;
 }
 
 void liberaFila(Fila *f)
