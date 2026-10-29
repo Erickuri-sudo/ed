@@ -44,5 +44,10 @@ int main(int argc, char const *argv[])
     }
     qtd = ocorrencias(a3,1);
     printf("%d\n",qtd);
+
+    a3 = arv_libera(a3);
+    liberaAluno(a);
+    liberaAluno(b);
+    liberaAluno(c);
     return 0;
 }
