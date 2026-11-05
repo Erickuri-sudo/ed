@@ -50,8 +50,26 @@ Abb *retiraAbb(Abb *a, char *nome)
             free(a);
             a = NULL;
         }
-        else if(a->dir == NULL){
-
+        else if(a->dir == NULL){ // um filho a esquerda
+            Abb* temp = a;
+            a = a->esq;
+            free(temp->nome);
+            free(temp);
+        }
+        else if(a->esq == NULL){ // um filho a direita
+            Abb* temp = a;
+            a = a->dir;
+            free(temp->nome);
+            free(temp);
+        }
+        else{ // dois filhos (no completo) precisa refazer a ligação entre maior e menor
+            Abb* f = a->esq;
+            while(f->dir!=NULL){
+                f = f->dir;
+            }
+            a->nome = strdup(f->nome);
+            a->mat = f->mat;
+            a->esq = retiraAbb(a->esq,nome);
         }
     }
     return a;
@@ -77,7 +95,7 @@ void imprimeAbb(Abb *a)
 {
     printf("<");
     if(a!=NULL){
-        printf("%s",a->nome);
+        printf("%s ",a->nome);
         imprimeAbb(a->esq);
         imprimeAbb(a->dir);
     }
